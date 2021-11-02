@@ -1,0 +1,23 @@
+.form {
+  @apply py-12 max-w-120 m-auto flex flex-col;
+}
+
+.locationInput {
+  @apply rounded-l-md p-2 border-t border-b border-l bg-white focus:outline-none focus:ring-2 w-full;
+}
+
+.checkBtn {
+  @apply px-3 rounded-r-md bg-yellow-400 text-gray-800 font-bold uppercase border-yellow-500 border-t border-b border-r sm:min-w-30;
+}
+
+.locationNormal {
+  @apply text-gray-800 border-gray-200 focus:ring-gray-200;
+}
+
+.locationError {
+  @apply border-red-500 text-red-600 placeholder-red-600 focus:ring-red-200;
+}
+
+.errorMessage {
+  @apply flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1;
+}

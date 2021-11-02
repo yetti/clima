@@ -8,10 +8,10 @@ type Props = {
 
 export default function Layout({ children }: Props) {
   return (
-    <>
+    <div className="clima-container">
       <Header />
-      <main className="container">{children}</main>
+      <main>{children}</main>
       <Footer />
-    </>
+    </div>
   )
 }
