@@ -1,6 +1,24 @@
 {
   "name": "clima",
+  "version": "0.0.0",
+  "description": "Next.js weather app",
+  "keywords": [
+    "weather",
+    "nextjs",
+    "openweatherapi"
+  ],
   "private": true,
+  "author": {
+    "name": "Yetrina Battad",
+    "email": "hello@yetti.io",
+    "url": "https://yetti.io"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/yetti/clima",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yetti/clima"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,6 +27,7 @@
   },
   "dependencies": {
     "next": "12.0.2",
+    "openweathermap-ts": "^1.2.10",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-hook-form": "^7.18.1",

@@ -1,19 +1,33 @@
 import { useForm, SubmitHandler } from 'react-hook-form'
 import styles from '../styles/LocationInput.module.css'
+import { CurrentResponse } from 'openweathermap-ts/dist/types'
 
 type LocationInputs = {
   location: string
 }
 
-export default function LocationInput() {
+type LocationInputProps = {
+  currentWeather: (weather: CurrentResponse) => void
+}
+
+export default function LocationInput(props: LocationInputProps) {
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm<LocationInputs>()
-  const onSubmit: SubmitHandler<LocationInputs> = (data) => {
-    console.log(data)
+
+  const onSubmit: SubmitHandler<LocationInputs> = async (formData) => {
+    const response = await fetch('/api/weather', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    })
+    const data = await response.json()
+    props.currentWeather(data.weather)
   }
 
   console.log(watch('location'))
@@ -25,8 +39,8 @@ export default function LocationInput() {
           className={`${styles.locationInput} ${
             errors.location ? styles.locationError : styles.locationNormal
           }`}
-          placeholder="Canberra, Australia"
-          defaultValue="Canberra, Australia"
+          placeholder="Your city name"
+          defaultValue="Canberra"
           {...register('location', { required: true })}
         />
         <button className={styles.checkBtn}>
