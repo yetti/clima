@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Image from 'next/image'
 import { ReactElement } from 'react'
 import { useState } from 'react'
 import LocationInput from '../components/location-input'
@@ -7,12 +8,14 @@ import { CurrentResponse } from 'openweathermap-ts/dist/types'
 
 export default function Home() {
   const [currentWeather, setCurrentWeather] = useState<CurrentResponse>()
-  const [weatherIcon, setWeatherIcon] = useState(0)
+  const [weatherIcon, setWeatherIcon] = useState('')
 
   function handleCurrentWeather(data: CurrentResponse) {
     setCurrentWeather(data)
-    if (currentWeather && currentWeather.weather) {
-      setWeatherIcon(currentWeather.weather[0].id)
+    if (data.weather) {
+      setWeatherIcon(data.weather[0].icon)
+    } else {
+      setWeatherIcon('')
     }
   }
 
@@ -27,7 +30,16 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <LocationInput currentWeather={handleCurrentWeather} />
-      <p>weatherIcon: {weatherIcon}</p>
+      {weatherIcon && (
+        <div>
+          <Image
+            src={`https://openweathermap.org/img/wn/${weatherIcon}@4x.png`}
+            width="200"
+            height="200"
+            alt="weather"
+          />
+        </div>
+      )}
       <p>{JSON.stringify(currentWeather)}</p>
     </>
   )
